@@ -1,0 +1,4 @@
+__pycache__
+.venv
+yarn.lock
+node_modules
