@@ -1,17 +1,19 @@
 import { Flex } from "antd";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import AppContext from "./context/AppContext";
+import AppContext from "../context/AppContext";
 
 export const UserPage = () => {
   const { id } = useParams()
   const { users } = useContext(AppContext)
+  const navigate = useNavigate()
+
 
   return (
     <Flex vertical>
-      <NavLink to="/users">Back</NavLink>
+      <NavLink onClick={() => navigate(-1)}>Back</NavLink>
       {users.filter(user => user.id == id).map(u =>
-        <div>
+        <div key={u.id}>
           <h3>Username: {u.username}</h3>
           <p>Email: {u.email}</p>
         </div>

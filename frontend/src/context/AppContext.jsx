@@ -2,18 +2,19 @@ import { createContext, useContext, useState, useEffect } from "react";
 import axios from 'axios'
 
 const AppContext = createContext({
-  login: true,
+  login: false,
+  auth: false,
   articleData: [],
   users: [],
   currentUser: null,
 });
 
 export function AppContextProvider({ children }) {
-  const [login, setLogin] = useState(true)
-  const [articleData, setArticleData] = useState([])
-  const [users, setUsers] = useState([])
-  const [currentUser, setCurrentUser] = useState(null)
-
+  const [login, setLogin] = useState(false);
+  const [articleData, setArticleData] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [auth, setAuth] = useState(false);
 
 
   useEffect(() => {
@@ -29,6 +30,10 @@ export function AppContextProvider({ children }) {
   }, [])
 
 
+  const addUser = (newUser) => {
+    setUsers((prev) => [...prev, newUser])
+  }
+
   return <AppContext.Provider value={{
     login,
     setLogin,
@@ -38,6 +43,9 @@ export function AppContextProvider({ children }) {
     setUsers,
     currentUser,
     setCurrentUser,
+    addUser,
+    auth,
+    setAuth,
   }}>{children}</AppContext.Provider>
 }
 

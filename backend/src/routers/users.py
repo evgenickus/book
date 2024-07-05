@@ -12,15 +12,14 @@ def search_user_by_username(username: str, db: Session = Depends(get_db)):
   user = crud.get_user_by_username(db, username)
   if not user:
     raise HTTPException(status_code=404, detail="User not found")
-  print(user.hashed_password)
   return user
 
 @router.get("/", response_model=List[schemas.UserBase])
 def read_users(db: Session = Depends(get_db)):
-  users = crud.get_users(db)
-  if not users:
-    raise HTTPException(status_code=404, detail="There is not any users in database")
-  return users
+  # users = crud.get_users(db)
+  # if not users:
+  #   raise HTTPException(status_code=404, detail="There is not any users in database")
+  return crud.get_users(db)
 
 @router.post("/", response_model=schemas.UserBase)
 def add_user(user: schemas.UserCreate, db: Session = Depends(get_db)):

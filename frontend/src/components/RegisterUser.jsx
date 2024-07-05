@@ -1,8 +1,13 @@
 import axios from "axios";
-import { Form, Input, Button, message } from "antd"
+import { Form, Input, Button, message } from "antd";
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterUser() {
+  const { setLogin, setCurrentUser, addUser } = useContext(AppContext);
   const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate()
 
   const success = () => {
     messageApi
@@ -27,23 +32,28 @@ export default function RegisterUser() {
       headers: {
         "Content-Type": "application/json"
       }
-    }).then(function () {
-
-      success()
-
-      // window.location = "/users";
-    }).catch(function (error) {
-
-      messageApi
-        .open({
-          type: 'loading',
-          content: 'Registration in progress..',
-          duration: 2.5,
-        })
-        .then(() => {
-          message.error(error.response.status === 409 ? error.response.data.detail : error.response.data.detail[0].msg, 10)
-        })
     })
+      .then(function (resp) {
+        localStorage.setItem("token", resp.data.access_token);
+        success();
+        setTimeout(() => {
+          setLogin(true);
+          setCurrentUser(values.username);
+          addUser(resp.data);
+          navigate("/");
+        }, 5500);
+      })
+      .catch(function (error) {
+        messageApi
+          .open({
+            type: 'loading',
+            content: 'Registration in progress..',
+            duration: 2.5,
+          })
+          .then(() => {
+            message.error(error.response.status === 409 ? error.response.data.detail : error.response.data.detail[0].msg, 10)
+          })
+      })
   }
 
   return (

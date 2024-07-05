@@ -1,14 +1,14 @@
 import { Button, Form, Input, message } from "antd"
 import axios from "axios"
-import AppContext from "./context/AppContext";
+import AppContext from "../context/AppContext";
 import { useContext } from "react";
-
-
+import { useNavigate } from "react-router-dom";
 
 
 export const LoginUser = () => {
-  const { setLogin, setCurrentUser } = useContext(AppContext)
+  const { setLogin, setCurrentUser, setAuth } = useContext(AppContext)
   const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate()
 
   const success = () => {
     messageApi
@@ -36,10 +36,11 @@ export const LoginUser = () => {
         localStorage.setItem("token", resp.data.access_token);
         success(values.username);
         setTimeout(() => {
-          setLogin(false);
+          setLogin(true);
           setCurrentUser(values.username);
+          setAuth(true)
+          navigate("/");
         }, 5500);
-        // setCurrentUser(values.username)
       })
       .catch(function (error) {
         messageApi

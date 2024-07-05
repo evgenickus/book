@@ -13,10 +13,9 @@ from .auth import get_current_user
 router = APIRouter()
 
 @router.get("/", response_model=List[schemas.ArticleBase])
-def read_articles(request: Request, db: Session = Depends(get_db)):
+def read_articles(db: Session = Depends(get_db)):
   articles = crud.get_articles(db)
   return articles
-  # return templates.TemplateResponse(request=request, name="base.html", context={"articles": articles})
 
 @router.get("/title", response_model=List[schemas.ArticleBase])
 def search_articles_by_title(title: str, db: Session = Depends(get_db)):  
