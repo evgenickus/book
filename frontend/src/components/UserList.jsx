@@ -6,14 +6,17 @@ import axios from "axios";
 
 
 export default function UserList() {
-  const { users, setAuth, auth } = useContext(AppContext)
-
+  const { users, setAuth, setLogin, setMenuKey } = useContext(AppContext)
+  setMenuKey('users')
   useEffect(() => {
     const token = localStorage.getItem("token")
-    axios.get(`http://127.0.0.1:8000/token/${token}`).then(resp => {
-      if (resp.data.message == "Token is valid") { setAuth(true) } else { setAuth(false) };
-      console.log(resp.data.message == "Token is valid");
-    })
+    axios.get(`http://127.0.0.1:8000/token/${token}`).then(function () {
+        setAuth(true)
+      }).catch(function(error) {
+        localStorage.removeItem("token")
+        setAuth(false)
+        setLogin(false)
+      } )
   }, [])
 
   return (

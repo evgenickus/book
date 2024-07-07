@@ -7,7 +7,7 @@ const { Header, Content, Footer } = Layout;
 
 
 export const LayoutMain = () => {
-  const { login, setLogin, currentUser, setAuth } = useContext(AppContext)
+  const { login, setLogin, currentUser, setAuth, menuKey } = useContext(AppContext)
 
   const firstLetterUppercase = (name) => {
     const capitalized = name &&
@@ -26,9 +26,9 @@ export const LayoutMain = () => {
   const items = [
     { "key": "home", "label": <NavLink to="/">Home</NavLink> },
     { "key": "articles", "label": <NavLink to="/articles">Articles</NavLink> },
-    { "key": "user", "label": <NavLink to="/users">Users</NavLink> },
+    login && { "key": "users", "label": <NavLink to="/users">Users</NavLink> },
     !login && { "key": "login", "label": <NavLink to="/login">Login</NavLink> },
-    { "key": "register", "label": <NavLink to="/register">Register</NavLink> },
+    !login && { "key": "register", "label": <NavLink to="/register">Register</NavLink> },
   ]
 
   return (
@@ -38,11 +38,12 @@ export const LayoutMain = () => {
           display: 'flex',
           alignItems: 'center',
         }}
-      >
+      >     
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={['home']}
+          selectedKeys={menuKey}
+          // defaultSelectedKeys={['home']}
           items={items}
           style={{
             flex: 1,

@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 
 
 export const LoginUser = () => {
-  const { setLogin, setCurrentUser, setAuth } = useContext(AppContext)
+  const { setLogin, setCurrentUser, setAuth, setMenuKey } = useContext(AppContext)
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate()
+
+  setMenuKey("login")
 
   const success = () => {
     messageApi

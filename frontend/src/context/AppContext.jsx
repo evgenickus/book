@@ -7,6 +7,7 @@ const AppContext = createContext({
   articleData: [],
   users: [],
   currentUser: null,
+  menuKey: [""],
 });
 
 export function AppContextProvider({ children }) {
@@ -15,6 +16,8 @@ export function AppContextProvider({ children }) {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [auth, setAuth] = useState(false);
+  const [menuKey, setMenuKey] = useState(null);
+
 
 
   useEffect(() => {
@@ -46,6 +49,8 @@ export function AppContextProvider({ children }) {
     addUser,
     auth,
     setAuth,
+    menuKey,
+    setMenuKey,
   }}>{children}</AppContext.Provider>
 }
 

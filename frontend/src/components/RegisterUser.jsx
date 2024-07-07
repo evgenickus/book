@@ -5,9 +5,10 @@ import AppContext from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterUser() {
-  const { setLogin, setCurrentUser, addUser } = useContext(AppContext);
+  const { setLogin, setCurrentUser, addUser, setMenuKey, setAuth } = useContext(AppContext);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate()
+  setMenuKey('register')
 
   const success = () => {
     messageApi
@@ -21,8 +22,6 @@ export default function RegisterUser() {
       })
   };
 
-
-
   const registerUser = (values) => {
     axios.post("http://127.0.0.1:8000/users/", {
       username: values.username,
@@ -34,13 +33,14 @@ export default function RegisterUser() {
       }
     })
       .then(function (resp) {
-        localStorage.setItem("token", resp.data.access_token);
+        // localStorage.setItem("token", resp.data.access_token);
         success();
         setTimeout(() => {
-          setLogin(true);
-          setCurrentUser(values.username);
+          // setLogin(true);
+          // setAuth(true)
+          // setCurrentUser(values.username);
           addUser(resp.data);
-          navigate("/");
+          navigate("/login");
         }, 5500);
       })
       .catch(function (error) {
