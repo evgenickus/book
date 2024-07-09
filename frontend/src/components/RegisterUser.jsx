@@ -15,10 +15,10 @@ export default function RegisterUser() {
       .open({
         type: 'loading',
         content: 'Registration in progress..',
-        duration: 2.5,
+        duration: 1.5,
       })
       .then(() => {
-        message.success('You Have Been Registred Successfully!', 5)
+        message.success('You Have Been Registred Successfully!', 2)
       })
   };
 
@@ -48,10 +48,10 @@ export default function RegisterUser() {
           .open({
             type: 'loading',
             content: 'Registration in progress..',
-            duration: 2.5,
+            duration: 1.5,
           })
           .then(() => {
-            message.error(error.response.status === 409 ? error.response.data.detail : error.response.data.detail[0].msg, 10)
+            message.error(error.response.status === 409 ? error.response.data.detail : error.response.data.detail[0].msg, 7)
           })
       })
   }

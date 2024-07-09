@@ -12,7 +12,7 @@ router = APIRouter()
 
 SECRET_KEY = "2c4404d4c97419990d6c9f47719f50e487ef04e13f202f646460e2ccea2db1a"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 1
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

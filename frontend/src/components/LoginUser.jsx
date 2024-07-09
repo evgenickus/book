@@ -17,10 +17,10 @@ export const LoginUser = () => {
       .open({
         type: 'loading',
         content: 'Login in progress..',
-        duration: 2.5,
+        duration: 1.5,
       })
       .then(() => {
-        message.success('You Have Been Login Successfully!', 3)
+        message.success('You Have Been Login Successfully!', 2)
       })
   };
 
@@ -42,17 +42,17 @@ export const LoginUser = () => {
           setCurrentUser(values.username);
           setAuth(true)
           navigate("/");
-        }, 5500);
+        }, 3500);
       })
       .catch(function (error) {
         messageApi
           .open({
             type: 'loading',
             content: 'Login in progress..',
-            duration: 2.5,
+            duration: 1.5,
           })
           .then(() => {
-            message.error(error.response.data.detail, 5)
+            message.error(error.response.data.detail, 7)
           })
       })
   };

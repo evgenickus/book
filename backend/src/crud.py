@@ -76,7 +76,7 @@ def create_article(db: Session, article: schemas.ArticleCreate, username: str):
   new_article = models.Article(title=article.title, content=article.content, user_id=article.user_id)
   db.add(new_article)
   db.commit()
-  return schemas.ArticleBase(title=new_article.title, content=article.content, username=username)
+  return schemas.ArticleBase(id=new_article.id, title=new_article.title, content=article.content, username=username)
 
 def edit_article(db: Session, content: str, user_id: int, article_id: int):
   stmt = select(models.Article.title, models.Article.content, models.User.username

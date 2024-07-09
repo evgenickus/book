@@ -37,6 +37,10 @@ export function AppContextProvider({ children }) {
     setUsers((prev) => [...prev, newUser])
   }
 
+  const addNewArticle = (newArticle) => {
+    setArticleData((prev) => [...prev, newArticle])
+  }
+
   return <AppContext.Provider value={{
     login,
     setLogin,
@@ -47,6 +51,7 @@ export function AppContextProvider({ children }) {
     currentUser,
     setCurrentUser,
     addUser,
+    addNewArticle,
     auth,
     setAuth,
     menuKey,
