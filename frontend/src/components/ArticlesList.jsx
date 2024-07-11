@@ -2,15 +2,15 @@ import { Button, Flex } from 'antd'
 import { NavLink } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import AppContext from '../context/AppContext'
-import { NewArticleForm } from './NewArticleForm'
+import { NewArticleModal } from './NewArticleModal'
 
 export default function ArticlesList() {
   const { articleData, setMenuKey, login } = useContext(AppContext)
-  const [ articleForm, setArticleForm] = useState(false)
+  const [ articleModal, setArticleModal] = useState(false)
   setMenuKey("articles")
   
   const addArticle = () => {
-    setArticleForm(true)
+    setArticleModal(true)
   }
 
   return (
@@ -25,8 +25,8 @@ export default function ArticlesList() {
           </div>
         )}
       </Flex>
-      { articleForm && <Flex>
-        <NewArticleForm />
+      { articleModal && <Flex>
+        <NewArticleModal hook={ setArticleModal } state={ articleModal }/>
       </Flex>}
     </>
   )
