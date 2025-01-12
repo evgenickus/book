@@ -12,7 +12,7 @@ router = APIRouter()
 
 SECRET_KEY = "2c4404d4c97419990d6c9f47719f50e487ef04e13f202f646460e2ccea2db1a"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 1
+ACCESS_TOKEN_EXPIRE_MINUTES = 2
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -66,6 +66,16 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
   if user is None:
     raise credentials_exception
   return user
+
+# async def verify_token(token: str = Depends(oauth2_scheme)):
+#   try:
+#     payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+#     user_id: int = payload.get("sub")
+#     if user_id is None:
+#       raise HTTPException(status_code=403, detail="Token is invalid or expired")
+#     return payload
+#   except jwt.exceptions.InvalidTokenError:
+#     raise HTTPException(status_code=403, detail="Token is invalid or expired")
 
 async def verify_token(token: str = Depends(oauth2_scheme)):
   try:
