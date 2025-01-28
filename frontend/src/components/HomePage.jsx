@@ -1,10 +1,14 @@
 import { Flex } from "antd";
 import AppContext from "../context/AppContext";
-import { useContext } from "react"; 
+import { useContext, useEffect } from "react"; 
 
 const HomePage = () => {
   const { setMenuKey} = useContext(AppContext);
-  setMenuKey("home")
+
+  useEffect(() => {
+    setMenuKey("home")
+  }, [])
+  
   return (
     <Flex justify="center" > Welcome To Forum</Flex >
   )

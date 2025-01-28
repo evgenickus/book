@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Form, Input, Button, message } from "antd";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AppContext from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,10 @@ export default function RegisterUser() {
   const { setLogin, setCurrentUser, addUser, setMenuKey, setAuth } = useContext(AppContext);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate()
-  setMenuKey('register')
+
+  useEffect(() => {
+    setMenuKey('register')
+  }, [])
 
   const success = () => {
     messageApi
@@ -59,11 +62,11 @@ export default function RegisterUser() {
   return (
 
     <Form
-      style={{ width: 900 }}
+      // style={{ width: 900 }}
       autoComplete="off"
       onFinish={registerUser}
       // name="basic"
-      labelCol={{ span: 8 }}
+      // labelCol={{ span: 8 }}
     // wrapperCol={{ span: 16 }}
     // initialValues={{ remember: true }}
     >
@@ -103,22 +106,10 @@ export default function RegisterUser() {
       >
         <Input />
       </Form.Item>
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           Register
         </Button>
-      </Form.Item>
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
       </Form.Item>
       {contextHolder}
     </Form>

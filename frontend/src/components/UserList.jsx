@@ -7,8 +7,10 @@ import axios from "axios";
 
 export default function UserList() {
   const { users, setAuth, setLogin, setMenuKey } = useContext(AppContext)
-  setMenuKey('users')
+
+  
   useEffect(() => {
+    setMenuKey('users')
     const token = localStorage.getItem("token")
     axios.get(`http://127.0.0.1:8000/token/${token}`).then(function () {
         setAuth(true)

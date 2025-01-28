@@ -25,17 +25,8 @@ export const NewArticleModal = ( {hook, state} ) => {
     })
   };
   
-  const handleOk = () => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setConfirmLoading(false);
-      hook(false);
-      // addArticle()
-    }, 2000);
-  };
 
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     hook(false);
   };
 
@@ -59,27 +50,23 @@ export const NewArticleModal = ( {hook, state} ) => {
         }, 4000);
       })
       .catch(function (error) {
-        
         messageApi.open({
           type: 'error',
           content: "You Are Not Authorized",
           duration: 1.5,
         })
-      })
-      // fail(error.response.status == 401 && "You Are Not Authorized")
-      setTimeout(() => {
+        setTimeout(() => {
           setConfirmLoading(false);
           navigate("/login");
           setLogin(false)
         }, 3500);
-      // });
+      })
   };
 
   return (
     <>
       <Modal
         width={900}
-
         title="Add New Post"
         open={state}
         okText={"Add"}
@@ -102,7 +89,7 @@ export const NewArticleModal = ( {hook, state} ) => {
               }
             ]}
           >
-            <Input value={title} onChange={(v) => setTitle(v.target.value)} />
+            <Input value={title} onChange={v => setTitle(v.target.value)} />
           </Form.Item>
             <Form.Item
             label="Content"

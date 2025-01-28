@@ -1,7 +1,7 @@
 import { Button, Form, Input, message } from "antd"
 import axios from "axios"
 import AppContext from "../context/AppContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,7 +10,9 @@ export const LoginUser = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate()
 
-  setMenuKey("login")
+  useEffect(() => {
+    setMenuKey("login")
+  }, [])
 
   const success = () => {
     messageApi
@@ -59,15 +61,31 @@ export const LoginUser = () => {
 
   return (
     <Form
-      onFinish={formSubmit}>
+      onFinish={formSubmit}
+      // labelCol={{ span: 3 }}
+    >
       <Form.Item
         label="Username"
-        name="username">
+        name="username"        
+        rules={[
+          {
+            required: true,
+            message: "Please input your username"
+          }
+        ]}
+      >
         <Input />
       </Form.Item>
       <Form.Item
         label="Password"
-        name="password">
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: "Please inter you password"
+          }
+        ]}
+      >
         <Input.Password />
       </Form.Item>
       <Form.Item>

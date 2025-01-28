@@ -8,12 +8,9 @@ import { ArticlePage } from "./components/ArticlePage";
 import { UserPage } from "./components/UserPage";
 import { LoginUser } from "./components/LoginUser";
 import { AppContextProvider } from "./context/AppContext";
-import AppContext from "./context/AppContext";
-import { useContext } from "react";
 import { RequireAuth } from "./components/hoc/RequireAuth";
 
 export default function App() {
-  const { users } = useContext(AppContext)
   return (
     <AppContextProvider>
       <Routes>

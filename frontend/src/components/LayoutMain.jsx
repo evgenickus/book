@@ -1,25 +1,20 @@
-
+import AppContext from "../context/AppContext";
 import { NavLink, Outlet } from "react-router-dom"
 import { Button, Layout, Menu, theme, Typography } from 'antd';
 import { useContext } from "react";
-import AppContext from "../context/AppContext";
+import { firstLetterUppercase } from "../utils/utils";
+
 const { Header, Content, Footer } = Layout;
 
 
 export const LayoutMain = () => {
-  const { login, setLogin, currentUser, setAuth, menuKey } = useContext(AppContext)
-
-  const firstLetterUppercase = (name) => {
-    const capitalized = name &&
-      name.charAt(0).toUpperCase()
-      + name.slice(1)
-    return capitalized
-  };
+  const { login, setLogin, currentUser, setAuth, menuKey, setAllArticles } = useContext(AppContext)
 
   const logout = () => {
     setLogin(false)
     localStorage.removeItem("token")
     setAuth(false)
+    setAllArticles(true)
   };
 
   const { token: { colorBgContainer, borderRadiusLG } } = theme.useToken();
@@ -61,7 +56,7 @@ export const LayoutMain = () => {
         <div
           style={{
             background: colorBgContainer,
-            height: "78vh",
+            minHeight: "78vh",
             padding: 24,
             borderRadius: borderRadiusLG,
           }}
